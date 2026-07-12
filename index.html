@@ -1,0 +1,779 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Keshav Agarwal — Portfolio</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,300;0,9..144,450;0,9..144,600;1,9..144,450&family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --bg: #EFEBE3;
+    --bg-alt: #E5E0D5;
+    --surface: #FAF8F3;
+    --ink: #262420;
+    --ink-soft: #55504A;
+    --ink-faint: #8B8478;
+    --line: #D3CCBE;
+    --accent: #5E6B52;       /* soft moss/graphite-green, drawn from Gurukripa kitchen + Santhalia planting */
+    --accent-soft: #97A188;
+    --clay: #A9855E;         /* muted clay, drawn from the wood tones throughout the work */
+    --paper: #F4F1E9;
+  }
+
+  *{box-sizing:border-box; margin:0; padding:0;}
+
+  html{scroll-behavior:smooth;}
+
+  html, body{
+    max-width:100%;
+    overflow-x:hidden;
+  }
+
+  body{
+    background:var(--bg);
+    color:var(--ink);
+    font-family:'Inter', sans-serif;
+    font-size:16px;
+    line-height:1.6;
+    -webkit-font-smoothing:antialiased;
+  }
+
+  .mono{
+    font-family:'JetBrains Mono', monospace;
+    letter-spacing:0.04em;
+    text-transform:uppercase;
+  }
+
+  h1,h2,h3,h4{
+    font-family:'Fraunces', serif;
+    font-weight:450;
+    letter-spacing:-0.01em;
+    color:var(--ink);
+  }
+
+  a{color:inherit; text-decoration:none;}
+
+  .wrap{
+    max-width:1180px;
+    margin:0 auto;
+    padding:0 48px;
+  }
+
+  /* ---------- corner-bracket signature element ---------- */
+  .bracket-frame{
+    position:relative;
+    padding:14px;
+    min-width:0;
+    min-height:0;
+    overflow:hidden;
+  }
+  .bracket-frame::before,
+  .bracket-frame::after,
+  .bracket-frame .bl,
+  .bracket-frame .br{
+    content:"";
+    position:absolute;
+    width:22px; height:22px;
+    border-color:var(--accent);
+    border-style:solid;
+    opacity:0.85;
+  }
+  .bracket-frame::before{ top:0; left:0; border-width:2px 0 0 2px; }
+  .bracket-frame::after{ top:0; right:0; border-width:2px 2px 0 0; }
+  .bracket-frame .bl{ bottom:0; left:0; border-width:0 0 2px 2px; }
+  .bracket-frame .br{ bottom:0; right:0; border-width:0 2px 2px 0; }
+  .bracket-frame img{
+    display:block;
+    width:100%;
+    height:100%;
+    object-fit:cover;
+  }
+
+  /* ---------- nav ---------- */
+  nav{
+    position:sticky; top:0; z-index:50;
+    background:rgba(239,235,227,0.92);
+    backdrop-filter:blur(6px);
+    border-bottom:1px solid var(--line);
+  }
+  nav .wrap{
+    display:flex; align-items:center; justify-content:space-between;
+    height:72px;
+  }
+  .nav-name{
+    font-family:'Fraunces', serif; font-size:19px; font-weight:600;
+  }
+  .nav-links{
+    display:flex; gap:32px; font-size:13px;
+  }
+  .nav-links a{
+    font-family:'JetBrains Mono', monospace;
+    text-transform:uppercase; letter-spacing:0.06em;
+    color:var(--ink-soft);
+    padding-bottom:4px;
+    border-bottom:1px solid transparent;
+    transition:border-color .2s, color .2s;
+  }
+  .nav-links a:hover{ color:var(--ink); border-color:var(--accent); }
+
+  /* ---------- hero ---------- */
+  header.hero{
+    padding:96px 0 72px;
+    position:relative;
+    overflow:hidden;
+  }
+  header.hero::before{
+    content:"";
+    position:absolute; inset:0;
+    background-image:
+      repeating-linear-gradient(0deg, transparent, transparent 63px, var(--line) 63px, var(--line) 64px),
+      repeating-linear-gradient(90deg, transparent, transparent 63px, var(--line) 63px, var(--line) 64px);
+    opacity:0.35;
+    mask-image: linear-gradient(180deg, black, transparent 85%);
+  }
+  .hero-grid{
+    position:relative;
+    display:grid;
+    grid-template-columns:1.3fr 0.9fr;
+    gap:56px;
+    align-items:center;
+  }
+  .eyebrow{
+    font-family:'JetBrains Mono', monospace;
+    font-size:12px; letter-spacing:0.12em; text-transform:uppercase;
+    color:var(--accent);
+    margin-bottom:18px;
+    display:flex; align-items:center; gap:10px;
+  }
+  .eyebrow::before{
+    content:""; width:28px; height:1px; background:var(--accent);
+  }
+  h1.title{
+    font-size:56px;
+    line-height:1.02;
+    margin-bottom:20px;
+  }
+  h1.title .thin{
+    font-weight:300;
+    font-style:italic;
+    color:var(--ink-soft);
+  }
+  .hero-role{
+    font-size:18px;
+    color:var(--ink-soft);
+    margin-bottom:28px;
+    max-width:480px;
+  }
+  .hero-meta{
+    display:flex; flex-wrap:wrap; gap:10px 28px;
+    font-size:13px;
+    font-family:'JetBrains Mono', monospace;
+    color:var(--ink-faint);
+  }
+  .hero-meta span{ color:var(--ink-soft); }
+
+  .hero-photo{
+    aspect-ratio:4/5;
+    max-width:340px;
+    margin-left:auto;
+  }
+
+  /* ---------- section shell ---------- */
+  section{ padding:88px 0; }
+  section.alt{ background:var(--bg-alt); }
+  .section-head{
+    display:flex; justify-content:space-between; align-items:flex-end;
+    margin-bottom:48px;
+    gap:24px;
+    border-bottom:1px solid var(--line);
+    padding-bottom:20px;
+  }
+  .section-num{
+    font-family:'JetBrains Mono', monospace;
+    font-size:12px; color:var(--accent);
+    letter-spacing:0.1em;
+  }
+  .section-head h2{
+    font-size:34px;
+  }
+  .section-sub{
+    font-size:14px; color:var(--ink-faint); max-width:320px; text-align:right;
+  }
+
+  /* ---------- about ---------- */
+  .about-grid{
+    display:grid;
+    grid-template-columns:1.4fr 1fr;
+    gap:64px;
+  }
+  .about-lead{
+    font-family:'Fraunces', serif;
+    font-size:23px;
+    font-weight:450;
+    line-height:1.45;
+    color:var(--ink);
+    margin-bottom:22px;
+  }
+  .about-body p{
+    color:var(--ink-soft);
+    margin-bottom:16px;
+    font-size:15.5px;
+  }
+  .skill-block{
+    margin-bottom:28px;
+  }
+  .skill-block h4{
+    font-family:'JetBrains Mono', monospace;
+    text-transform:uppercase;
+    font-size:12px;
+    letter-spacing:0.08em;
+    color:var(--accent);
+    margin-bottom:12px;
+    font-weight:500;
+  }
+  .tag-row{
+    display:flex; flex-wrap:wrap; gap:8px;
+  }
+  .tag{
+    font-size:13px;
+    padding:6px 12px;
+    border:1px solid var(--line);
+    border-radius:3px;
+    color:var(--ink-soft);
+    background:var(--surface);
+  }
+
+  /* ---------- experience timeline ---------- */
+  .timeline{
+    position:relative;
+    padding-left:28px;
+    border-left:1px solid var(--line);
+  }
+  .tl-item{
+    position:relative;
+    padding-bottom:44px;
+  }
+  .tl-item:last-child{ padding-bottom:0; }
+  .tl-item::before{
+    content:"";
+    position:absolute;
+    left:-33px; top:4px;
+    width:9px; height:9px;
+    border-radius:50%;
+    background:var(--bg);
+    border:2px solid var(--accent);
+  }
+  .tl-date{
+    font-family:'JetBrains Mono', monospace;
+    font-size:12px; text-transform:uppercase; letter-spacing:0.06em;
+    color:var(--ink-faint);
+    margin-bottom:6px;
+  }
+  .tl-role{
+    font-family:'Fraunces', serif;
+    font-size:21px;
+    margin-bottom:4px;
+  }
+  .tl-org{
+    font-size:14px;
+    color:var(--accent);
+    margin-bottom:12px;
+  }
+  .tl-desc{
+    font-size:14.5px;
+    color:var(--ink-soft);
+    max-width:640px;
+    margin-bottom:10px;
+  }
+  .tl-list{
+    list-style:none;
+    font-size:14px;
+    color:var(--ink-soft);
+  }
+  .tl-list li{
+    padding-left:16px;
+    position:relative;
+    margin-bottom:5px;
+  }
+  .tl-list li::before{
+    content:"—";
+    position:absolute; left:0; color:var(--clay);
+  }
+
+  /* ---------- projects: featured ---------- */
+  .project{
+    margin-bottom:104px;
+  }
+  .project:last-child{ margin-bottom:0; }
+  .project-top{
+    display:grid;
+    grid-template-columns:0.85fr 1.15fr;
+    gap:56px;
+    margin-bottom:28px;
+    align-items:end;
+  }
+  .project-index{
+    font-family:'JetBrains Mono', monospace;
+    font-size:13px;
+    color:var(--clay);
+    margin-bottom:10px;
+  }
+  .project-title{
+    font-size:36px;
+    margin-bottom:10px;
+  }
+  .project-loc{
+    font-size:13px;
+    color:var(--ink-faint);
+    font-family:'JetBrains Mono', monospace;
+    text-transform:uppercase;
+    letter-spacing:0.06em;
+    margin-bottom:18px;
+  }
+  .project-tags{
+    display:flex; gap:8px; flex-wrap:wrap;
+  }
+  .project-desc{
+    color:var(--ink-soft);
+    font-size:15px;
+    line-height:1.7;
+  }
+  .project-gallery{
+    display:grid;
+    gap:14px;
+    min-width:0;
+  }
+  .project-gallery > div{
+    min-width:0;
+  }
+  .g-1{ grid-template-columns:1fr; }
+  .g-2{ grid-template-columns:1.4fr 1fr; }
+  .g-3{ grid-template-columns:1fr 1fr 1fr; }
+  .g-hero{ grid-template-columns:1fr; }
+  .project-gallery .bracket-frame{ aspect-ratio:4/3; }
+  .project-gallery .tall{ aspect-ratio:3/4; }
+  .project-gallery .wide{ aspect-ratio:16/9; }
+
+  /* ---------- additional works grid ---------- */
+  .works-grid{
+    display:grid;
+    grid-template-columns:repeat(2, 1fr);
+    gap:40px 48px;
+  }
+  .work-card .bracket-frame{ aspect-ratio:5/4; margin-bottom:18px; }
+  .work-card h3{ font-size:22px; margin-bottom:4px; }
+  .work-card .project-loc{ margin-bottom:12px; }
+  .work-card p{ font-size:14px; color:var(--ink-soft); }
+  .work-thumbs{
+    display:grid;
+    grid-template-columns:1fr 1fr;
+    gap:10px;
+  }
+
+  /* ---------- footer ---------- */
+  footer{
+    background:var(--ink);
+    color:var(--paper);
+    padding:72px 0 40px;
+  }
+  footer h2{
+    color:var(--paper);
+    font-size:32px;
+    margin-bottom:16px;
+  }
+  footer .foot-sub{
+    color:#B9B3A6;
+    max-width:440px;
+    margin-bottom:36px;
+    font-size:15px;
+  }
+  .foot-grid{
+    display:grid;
+    grid-template-columns:1fr 1fr;
+    max-width:520px;
+    gap:32px;
+    padding-top:36px;
+    border-top:1px solid #45423B;
+    font-size:13px;
+  }
+  .foot-grid h4{
+    font-family:'JetBrains Mono', monospace;
+    text-transform:uppercase;
+    font-size:11px;
+    letter-spacing:0.08em;
+    color:#8f897c;
+    margin-bottom:10px;
+    font-weight:500;
+  }
+  .foot-grid a, .foot-grid div{ color:#D8D3C6; margin-bottom:4px; display:block;}
+  .foot-copy{
+    margin-top:48px;
+    font-size:12px;
+    color:#6f6a5f;
+    font-family:'JetBrains Mono', monospace;
+  }
+
+  @media(max-width:860px){
+    .wrap{padding:0 22px;}
+    .hero-grid{grid-template-columns:1fr; gap:32px;}
+    .hero-photo{max-width:220px; margin:0;}
+    h1.title{font-size:38px;}
+    .about-grid{grid-template-columns:1fr; gap:36px;}
+    .section-head{flex-direction:column; align-items:flex-start; gap:10px;}
+    .section-sub{text-align:left;}
+    .project-top{grid-template-columns:1fr; gap:20px;}
+    .g-2, .g-3{grid-template-columns:1fr 1fr;}
+    .works-grid{grid-template-columns:1fr;}
+    .foot-grid{grid-template-columns:1fr; gap:20px;}
+  }
+</style>
+</head>
+<body>
+
+<nav>
+  <div class="wrap">
+    <div class="nav-name">Keshav Agarwal</div>
+    <div class="nav-links">
+      <a href="#about">About</a>
+      <a href="#experience">Experience</a>
+      <a href="#work">Work</a>
+      <a href="#contact">Contact</a>
+    </div>
+  </div>
+</nav>
+
+<header class="hero">
+  <div class="wrap">
+    <div class="hero-grid">
+      <div>
+        <div class="eyebrow">Architecture &amp; Interior Design</div>
+        <h1 class="title">Keshav<br><span class="thin">Agarwal</span></h1>
+        <p class="hero-role">Architect with five-plus years across residential, commercial and industrial work — from concept through construction. Founder of Ratan Deep Architectural Studio, Patna.</p>
+        <div class="hero-meta">
+          <div><span>Based in</span> Patna, Bihar — open to relocation</div>
+          <div><span>Email</span> agarwalkeshav97@gmail.com</div>
+          <div><span>Phone</span> +91 88265 82492</div>
+        </div>
+      </div>
+      <div class="bracket-frame hero-photo">
+        <span class="bl"></span><span class="br"></span>
+        <img src="assets/headshot.jpg" alt="Keshav Agarwal">
+      </div>
+    </div>
+  </div>
+</header>
+
+<section id="about">
+  <div class="wrap">
+    <div class="section-head">
+      <div>
+        <div class="section-num">01 — Profile</div>
+        <h2>About</h2>
+      </div>
+      <div class="section-sub">Founder-led practice with hands-on execution experience across firm and independent work.</div>
+    </div>
+
+    <div class="about-grid">
+      <div>
+        <p class="about-lead">Five-plus years of practice spanning residential, commercial and healthcare architecture — from first sketch through to site supervision.</p>
+        <div class="about-body">
+          <p>I founded Ratan Deep Architectural Studio (RDA) in 2024, initially running it alongside a full-time role at Ardent Architects before taking it on full-time. The studio's focus is bespoke residential architecture and interiors — custom homes, renovations and luxury interiors — with select commercial and institutional work alongside it.</p>
+          <p>Before RDA, I spent close to four years at Ardent Architects, working on commercial interiors, healthcare facilities and workplace projects across Delhi NCR — the drafting discipline and consultant coordination habits from those years still shape how I run projects today.</p>
+          <p>I'm currently looking to bring that combination — independent design leadership plus structured-firm execution discipline into a larger studio or design team.</p>
+        </div>
+      </div>
+
+      <div>
+        <div class="skill-block">
+          <h4>Design Software</h4>
+          <div class="tag-row">
+            <span class="tag">AutoCAD</span>
+            <span class="tag">SketchUp</span>
+            <span class="tag">Enscape</span>
+            <span class="tag">Rhinoceros</span>
+            <span class="tag">Revit</span>
+            <span class="tag">Lumion</span>
+            <span class="tag">Photoshop</span>
+            <span class="tag">InDesign</span>
+          </div>
+        </div>
+        <div class="skill-block">
+          <h4>Technical</h4>
+          <div class="tag-row">
+            <span class="tag">Working Drawings</span>
+            <span class="tag">Code Compliance</span>
+            <span class="tag">Site Planning</span>
+            <span class="tag">Construction Detailing</span>
+          </div>
+        </div>
+        <div class="skill-block">
+          <h4>Practice</h4>
+          <div class="tag-row">
+            <span class="tag">Client Management</span>
+            <span class="tag">Design Leadership</span>
+            <span class="tag">Multi-city Coordination</span>
+            <span class="tag">Site Supervision</span>
+            <span class="tag">Vendor Liaison</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="experience" class="alt">
+  <div class="wrap">
+    <div class="section-head">
+      <div>
+        <div class="section-num">02 — Record</div>
+        <h2>Experience</h2>
+      </div>
+
+    </div>
+
+    <div class="timeline">
+      <div class="tl-item">
+        <div class="tl-date">March 2024 — Present</div>
+        <div class="tl-role">Principal Architect &amp; Founder</div>
+        <div class="tl-org">Ratan Deep Architectural Studio (RDA)</div>
+        <div class="tl-desc">Independent architecture and interior design practice focused on bespoke residential work, luxury interiors, renovations and custom homes — with select commercial and institutional projects. End-to-end service from feasibility and concept through construction documentation, consultant coordination and site execution.</div>
+        <ul class="tl-list">
+          <li>Lead projects across residential, commercial and institutional sectors</li>
+          <li>Manage full project lifecycle — feasibility, concept design, technical documentation, consultant coordination, construction support</li>
+          <li>Coordinate structural, MEP and specialist consultants across multiple concurrent, multi-city projects</li>
+          <li>Supervise construction activity to protect design intent and technical accuracy on site</li>
+        </ul>
+      </div>
+
+      <div class="tl-item">
+        <div class="tl-date">2021 — May 2024</div>
+        <div class="tl-role">Project Architect</div>
+        <div class="tl-org">Ardent Architects</div>
+        <div class="tl-desc">Commercial interiors, healthcare facilities and workplace projects across Delhi NCR, from design development through construction execution — architectural drawings, consultant coordination, site inspections and construction support.</div>
+      </div>
+
+      <div class="tl-item">
+        <div class="tl-date">April 2020 — 2021</div>
+        <div class="tl-role">Architect</div>
+        <div class="tl-org">Avon Realtech</div>
+        <div class="tl-desc">First professional role following graduation, based in Patna.</div>
+      </div>
+
+      <div class="tl-item">
+        <div class="tl-date">2018 — 2019</div>
+        <div class="tl-role">Architectural Intern</div>
+        <div class="tl-org">Raj Agarwal &amp; Associates</div>
+        <div class="tl-desc">Professional training in architectural design, drafting, construction documentation and project coordination on residential and commercial developments, during undergraduate study.</div>
+      </div>
+
+      <div class="tl-item">
+        <div class="tl-date">2015 — 2020</div>
+        <div class="tl-role">Bachelor of Architecture</div>
+        <div class="tl-org">Amity School of Architecture and Planning, Amity University, Noida</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="work">
+  <div class="wrap">
+    <div class="section-head">
+      <div>
+        <div class="section-num">03 — Selected Work</div>
+        <h2>Featured Projects</h2>
+      </div>
+      <div class="section-sub">Concept through construction, across residential and commercial typologies.</div>
+    </div>
+
+    <!-- KUNJ FORGING OFFICE -->
+    <div class="project">
+      <div class="project-top">
+        <div>
+          <div class="project-index">01 / Office</div>
+          <h3 class="project-title">Kunj Forging Office</h3>
+          <div class="project-loc">Pilakua, Uttar Pradesh</div>
+          <div class="project-tags">
+            <span class="tag">New Build</span>
+            <span class="tag">Corporate Office</span>
+            <span class="tag">Plan to Site</span>
+          </div>
+        </div>
+        <p class="project-desc">A new corporate office for a forging plant, planned around a double-height entrance and reception that sets the tone for the whole building. Small skylights are placed through the plan to pull daylight and a sense of the outdoors into deep interior zones — bringing the surrounding landscape inside rather than shutting it out. Delivered from concept through structural framing and site supervision.</p>
+      </div>
+      <div class="project-gallery g-2">
+        <div class="bracket-frame wide"><span class="bl"></span><span class="br"></span><img src="assets/kunj-1.jpg" alt="Kunj Forging Office exterior render"></div>
+        <div class="bracket-frame"><span class="bl"></span><span class="br"></span><img src="assets/kunj-3.jpg" alt="Kunj Forging Office reception interior"></div>
+      </div>
+      <div class="project-gallery g-3" style="margin-top:14px;">
+        <div class="bracket-frame"><span class="bl"></span><span class="br"></span><img src="assets/kunj-plan-1.jpg" alt="Kunj Forging Office ground floor plan"></div>
+        <div class="bracket-frame"><span class="bl"></span><span class="br"></span><img src="assets/kunj-plan-2.jpg" alt="Kunj Forging Office first floor plan"></div>
+        <div class="bracket-frame"><span class="bl"></span><span class="br"></span><img src="assets/kunj-5.jpg" alt="Kunj Forging Office under construction"></div>
+      </div>
+    </div>
+
+    <!-- KSC COMMERCIAL -->
+    <div class="project">
+      <div class="project-top">
+        <div>
+          <div class="project-index">02 / Commercial</div>
+          <h3 class="project-title">Karnal Square Commercial</h3>
+          <div class="project-loc">Karnal, Haryana</div>
+          <div class="project-tags">
+            <span class="tag">Mixed-Use</span>
+            <span class="tag">Site Planning</span>
+            <span class="tag">Multi-Tenant</span>
+          </div>
+        </div>
+        <p class="project-desc">A large-scale mixed-use commercial block organised into three distinct programmes stacked vertically: ground-floor retail, first-floor government offices, and third and fourth floors of leasable office space — each with its own access and parking logic worked into a single coherent site plan. Currently under construction.</p>
+      </div>
+      <div class="project-gallery g-2">
+        <div class="bracket-frame wide"><span class="bl"></span><span class="br"></span><img src="assets/ksc-plan.jpg" alt="Karnal Square Commercial site plan"></div>
+        <div class="bracket-frame"><span class="bl"></span><span class="br"></span><img src="assets/ksc-2.jpg" alt="Karnal Square Commercial construction progress"></div>
+      </div>
+    </div>
+
+    <!-- HARSHA RESIDENCE -->
+    <div class="project">
+      <div class="project-top">
+        <div>
+          <div class="project-index">03 / Residential</div>
+          <h3 class="project-title">Harsha Residence</h3>
+          <div class="project-loc">Dwarka, Delhi</div>
+          <div class="project-tags">
+            <span class="tag">Multi-Level</span>
+            <span class="tag">Home + Office</span>
+          </div>
+        </div>
+        <p class="project-desc">A dual-wing residence combining a working office wing — conference room, workstations, cabins and reception — with a private residential wing across two upper levels, organised around a central courtyard that brings light and ventilation into the deep floor plate.</p>
+      </div>
+      <div class="project-gallery g-hero">
+        <div class="bracket-frame"><span class="bl"></span><span class="br"></span><img src="assets/harsha-plan.jpg" alt="Harsha Residence floor plans"></div>
+      </div>
+    </div>
+
+    <!-- DSP RESIDENCE -->
+    <div class="project">
+      <div class="project-top">
+        <div>
+          <div class="project-index">04 / Residential</div>
+          <h3 class="project-title">DSP Residence</h3>
+          <div class="project-loc">Anisabad, Patna, Bihar</div>
+          <div class="project-tags">
+            <span class="tag">Courtyard Planning</span>
+            <span class="tag">Interiors</span>
+          </div>
+        </div>
+        <p class="project-desc">A residence organised around a central courtyard, with the drawing, dining and kitchen areas wrapped around it at ground level for cross-ventilation and daylight. The upper floor holds bedrooms, a large - open mandir area and an open terrace, with warm timber-panelled interiors carried through the living spaces.</p>
+      </div>
+      <div class="project-gallery g-1">
+        <div class="bracket-frame"><span class="bl"></span><span class="br"></span><img src="assets/dsp-plan-1.jpg" alt="DSP Residence ground floor plan"></div>
+      </div>
+      <div class="project-gallery g-2" style="margin-top:14px;">
+        <div class="bracket-frame"><span class="bl"></span><span class="br"></span><img src="assets/dsp-2.jpg" alt="DSP Residence dining area"></div>
+        <div class="bracket-frame"><span class="bl"></span><span class="br"></span><img src="assets/dsp-4.jpg" alt="DSP Residence living room"></div>
+      </div>
+    </div>
+
+    <!-- GURUKRIPA RESIDENCE -->
+    <div class="project">
+      <div class="project-top">
+        <div>
+          <div class="project-index">05 / Residential</div>
+          <h3 class="project-title">Gurukripa Residence</h3>
+          <div class="project-loc">Patna, Bihar</div>
+          <div class="project-tags">
+            <span class="tag">Urban Infill</span>
+            <span class="tag">Interiors</span>
+          </div>
+        </div>
+        <p class="project-desc">A compact Two and half - storey infill home for a narrow urban plot, with a stone-clad and stucco street facade broken up by planted balconies. Inside, an olive-toned kitchen with warm timber accents anchors the ground floor living spaces.</p>
+      </div>
+	<div class="project-gallery g-2">
+        <div class="bracket-frame tall"><span class="bl"></span><span class="br"></span><img src="assets/gurukripa-1.jpg" alt="Gurukripa Residence facade"></div>
+        <div class="bracket-frame tall"><span class="bl"></span><span class="br"></span><img src="assets/gurukripa-2.jpg" alt="Gurukripa Residence kitchen"></div>
+      </div>
+    </div>
+
+    <!-- SANTHALIA RESIDENCE -->
+    <div class="project">
+      <div class="project-top">
+        <div>
+          <div class="project-index">06 / Residential</div>
+          <h3 class="project-title">Santhalia Residence</h3>
+          <div class="project-loc">Biratnagar, Nepal</div>
+          <div class="project-tags">
+            <span class="tag">International</span>
+            <span class="tag">Facade Design</span>
+          </div>
+        </div>
+        <p class="project-desc">A two-storey residence with a textured stone-pattern facade and perforated jali screen walls that manage privacy and cross-ventilation without closing the building off from the street. A rooftop planted terrace and recessed balcony bring greenery up through the elevation.</p>
+      </div>
+      <div class="project-gallery g-1">
+        <div class="bracket-frame wide"><span class="bl"></span><span class="br"></span><img src="assets/santhalia-1.jpg" alt="Santhalia Residence facade"></div>
+      </div>
+      <div class="project-gallery g-2">
+        <div class="bracket-frame"><span class="bl"></span><span class="br"></span><img src="assets/santhalia-2.jpg" alt="Santhalia Residence facade"></div>
+        <div class="bracket-frame"><span class="bl"></span><span class="br"></span><img src="assets/santhalia-3.jpg" alt="Santhalia Residence living room"></div>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+<section class="alt">
+  <div class="wrap">
+    <div class="section-head">
+      <div>
+        <div class="section-num">04 — Exterior &amp; Fit-outs</div>
+        <h2>Additional Works</h2>
+      </div>
+      <div class="section-sub">Some facade work done over the years.</div>
+    </div>
+
+    <div class="works-grid">
+
+      <div class="work-card">
+        <div class="bracket-frame wide"><span class="bl"></span><span class="br"></span><img src="assets/peeli-kothi-1.jpg" alt="Peeli Kothi facade"></div>
+        <h3>Peeli Kothi</h3>
+        <div class="project-loc">Chhatarpur, Delhi</div>
+        <p>A multi-storey residential building with ground-floor retail frontage. The facade combines glazing, wood-slat screening and a circular light feature; interiors carry a warm, textured material language through fluted panelling and sculptural pendant fittings.</p>
+      </div>
+
+      <div class="work-card">
+        <div class="bracket-frame"><span class="bl"></span><span class="br"></span><img src="assets/singhals-1.jpg" alt="Singhal's living room"></div>
+        <h3>Singhal's</h3>
+        <div class="project-loc">Patna, Bihar</div>
+        <p>Residential interior fit-out built around a curved sectional sofa, fluted wood panelling and a warm neutral palette carried through the living and bedroom spaces.</p>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<footer id="contact">
+  <div class="wrap">
+    <h2>Let's talk.</h2>
+    <p class="foot-sub"> Open to Design Manager, Project Architect or Senior/Associate Architect roles.</p>
+    <p class="foot-sub"> Currently based in Patna, Open to relocation.</p>
+
+    <div class="foot-grid">
+      <div>
+        <h4>Contact</h4>
+        <a href="mailto:agarwalkeshav97@gmail.com">agarwalkeshav97@gmail.com</a>
+        <div>+91 88265 82492</div>
+        <a href="https://www.linkedin.com/in/keshav-agarwal-3bb167173/" target="_blank">LinkedIn ↗</a>
+      </div>
+      <div>
+        <h4>Practice</h4>
+        <div>Ratan Deep Architectural Studio</div>
+        <div>Patna, Bihar</div>
+      </div>
+    </div>
+
+    <div class="foot-copy">Keshav Agarwal — Portfolio — 2026</div>
+  </div>
+</footer>
+
+</body>
+</html>
